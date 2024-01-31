@@ -28,6 +28,10 @@ public class PalServerManager : MonoBehaviour
         Init();
         InitObjectList();
     }
+    void Start()
+    {
+        Screen.SetResolution(800, 600, false);
+    }
     void Update()
     {
         if (palServerData.currentProcess != null)
