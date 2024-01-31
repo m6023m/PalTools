@@ -13,3 +13,6 @@ PalWorld의 Dedicated Server를 실행시킬 때 설정을 편하게 할 수 있
 
 ![image](https://github.com/m6023m/PalTools/assets/6476629/7fd0ee7f-f648-45bd-afd7-9f9892cc397a)
 ![image](https://github.com/m6023m/PalTools/assets/6476629/372b39db-255e-41b5-9d99-2564b7ee063b)
+
+실행파일 링크
+https://mega.nz/file/LRRHjI7K#k2oFRGFGcbrSXlJC2IBJ-zi671z0mF28nzGVEdvbwlE
