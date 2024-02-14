@@ -10,27 +10,41 @@ public class PalServerSlider : PalServerObject
     {
         base.Awake();
         slider = GetComponentInChildren<Slider>();
-        slider.onValueChanged.AddListener(delegate { SliderValueChanged(slider); });
     }
 
-    void SliderValueChanged(Slider slider)
+    void Start()
     {
-        if (palServerValue.type == PalServerValue.ValueType.Int)
-        {
-            slider.wholeNumbers = true;
-        }
-        else
+        slider.onValueChanged.AddListener(SliderValueChanged);
+    }
+    void SliderValueChanged(float changedValue)
+    {
+        palServerValue.Value = changedValue.ToString();
+    }
+
+    public void Init()
+    {
+        slider.minValue = palServerValue.minValue;
+        slider.maxValue = palServerValue.maxValue;
+        if (palServerValue.type == PalServerValue.ValueType.Float)
         {
             slider.wholeNumbers = false;
         }
-        palServerValue.Value = slider.value.ToString();
+        else
+        {
+            slider.wholeNumbers = true;
+        }
     }
 
     protected override void Update()
     {
         base.Update();
-        slider.value = palServerValue.ValueToFloat();
-        slider.minValue = palServerValue.minValue;
-        slider.maxValue = palServerValue.maxValue;
+        if (palServerValue.type == PalServerValue.ValueType.Float)
+        {
+            slider.value = palServerValue.ValueToFloat();
+        }
+        else
+        {
+            slider.value = palServerValue.ValueToInt();
+        }
     }
 }

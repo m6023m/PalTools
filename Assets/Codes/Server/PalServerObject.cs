@@ -11,6 +11,10 @@ public class PalServerObject : MonoBehaviour
     {
         textName = GetComponentInChildren<TextMeshProUGUI>(true);
         inputValue = GetComponentInChildren<TMP_InputField>(true);
+    }
+
+    void Start()
+    {
         inputValue.onValueChanged.AddListener(OnValueChanged);
     }
 

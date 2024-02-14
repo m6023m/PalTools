@@ -12,6 +12,9 @@ public class PalServerList : PalServerObject
     {
         base.Awake();
         dropdown = GetComponentInChildren<TMP_Dropdown>();
+    }
+    void Start()
+    {
         dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(dropdown); });
     }
     void DropdownValueChanged(TMP_Dropdown changed)

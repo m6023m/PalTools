@@ -43,6 +43,22 @@ public class PalServerValue
         this.maxValue = maxValue;
     }
 
+    public PalServerValue()
+    {
+
+    }
+    public PalServerValue InitPalServerValue(PalServerValue palServerValue)
+    {
+        type = palServerValue.type;
+        name = palServerValue.name;
+        displayName = palServerValue.displayName;
+        Value = palServerValue.Value;
+        listValues = palServerValue.listValues;
+        minValue = palServerValue.minValue;
+        maxValue = palServerValue.maxValue;
+        return this;
+    }
+
     public string ValueToString()
     {
         return Value;
@@ -51,6 +67,7 @@ public class PalServerValue
     public float ValueToFloat()
     {
         if (float.TryParse(Value, out float floatValue)) return floatValue;
+        if (int.TryParse(Value, out int intValue)) return intValue;
         return 0.0f;
     }
     public int ValueToInt()

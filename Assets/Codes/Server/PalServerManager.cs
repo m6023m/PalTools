@@ -18,11 +18,13 @@ public class PalServerManager : MonoBehaviour
     public Button buttonSave;
     public Button buttonStart;
     TextMeshProUGUI buttonText;
+    List<PalServerObject> palServerObjects = new List<PalServerObject>();
+    List<PalServerValue> palServerValues = new List<PalServerValue>();
 
     void Awake()
     {
         instance = this;
-        buttonText = buttonStart.GetComponentInChildren<TextMeshProUGUI>(); // TextMeshProUGUI 컴포넌트 찾기
+        buttonText = buttonStart.GetComponentInChildren<TextMeshProUGUI>();
         buttonSave.onClick.AddListener(Save);
         buttonStart.onClick.AddListener(ServerStart);
         Init();
@@ -30,6 +32,7 @@ public class PalServerManager : MonoBehaviour
     }
     void Start()
     {
+        InitObjectData();
         Screen.SetResolution(800, 600, false);
     }
     void Update()
@@ -162,19 +165,32 @@ public class PalServerManager : MonoBehaviour
                 case PalServerValue.ValueType.String:
                     PalServerObject palServerObject = Instantiate(palServerObjectPrefab, content.transform);
                     palServerObject.palServerValue = palServerValue;
+                    palServerObjects.Add(palServerObject);
                     break;
                 case PalServerValue.ValueType.Bool:
                 case PalServerValue.ValueType.List:
                     PalServerList palServerList = Instantiate(palServerListPrefab, content.transform);
                     palServerList.palServerValue = palServerValue;
+                    palServerObjects.Add(palServerList);
                     break;
                 case PalServerValue.ValueType.Float:
                 case PalServerValue.ValueType.Int:
                     PalServerSlider palServerSlider = Instantiate(palServerSliderPrefab, content.transform);
                     palServerSlider.palServerValue = palServerValue;
+                    palServerSlider.Init();
+                    palServerObjects.Add(palServerSlider);
                     break;
             }
-
+            palServerValues.Add(new PalServerValue().InitPalServerValue(palServerValue));
+        });
+    }
+    void InitObjectData()
+    {
+        int index = 0;
+        palServerObjects.ForEach((palServerObject) =>
+        {
+            palServerObject.palServerValue.Value = palServerValues[index].Value;
+            index++;
         });
     }
 
